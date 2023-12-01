@@ -1,0 +1,13 @@
+1 - Faça a instalação do aplicativo telegram para windows
+2 - Após instalado, va em busca e procure por BotFather
+3 - Depois disso, inicia um chat com BotFather digitando /start
+4 - Para criação de um novo bot, clique em newbot e de um nome a ele, siga as instruções do telegram
+5 - Após o passo anterior, será enviado uma mensagem com um link do seu bot e uma chave token
+6 - Nesta mesma tela, logo acima existem varias opções, ver cada uma.
+7 - Antes de fazer alteração, no chat, digite @nomedobot
+8 - Se necessário, para gerar um novo token, digite /start novamente e click em token
+9 - Vá em setprivacy, lá existem as opções para pessoa interagir com seu bot. Existem duas formas
+para esta interação, uma a pessoa digia /nomedobot e a outra o nome do bot. Se colocar em 'disable'
+as duas formas serão aceitas. Vou colocar em Disable.
+10 - Crie um grupo vazio e adicione seu bot, no caso davidsp_bot
+11 - Agora vamos ao codigo, crie um arquivo python. Vou criar app.py
