@@ -4,7 +4,7 @@ from time import sleep
 
 # Para criar um bot precisamos de
 # token: 6784879599:AAGP2MTGyujuEJc61-jpN7M-qOQywUyRIes
-# URL do API: https://core.telegram.org/bots/api
+# URL do API: https://core.telegram.org/bots/api    
 # ao abrir o link acima, vá em making requests e copie o link em vermelho
 # URL do API: https://api.telegram.org/bot<token>/METHOD_NAME
 
@@ -22,6 +22,7 @@ def obter_mensagens(apenas_ultima_mensagem=False):
     update_id = None # identificador da ultima mensagem enviada no grupo (numero das mensagens)
     token = '6784879599:AAGP2MTGyujuEJc61-jpN7M-qOQywUyRIes'
     data = requests.get(f'https://api.telegram.org/bot{token}/getUpdates') # Fazendo a requisição
+    print(data.json())
     if len(data.json()['result']) > 0: # result está no arquivo json gerado
         if apenas_ultima_mensagem == True:
             update_id = data.json()['result'][-1]['update_id'] # pegar o ultimo resultado da chave update_id
@@ -30,14 +31,43 @@ def obter_mensagens(apenas_ultima_mensagem=False):
         else:
             print(data.json())    
 
-while True:
-    obter_mensagens(apenas_ultima_mensagem=True) # Quero todas as mensagens a partir do momento da execução do bot
-# Se colocar em True, retorna apenas a ultima
+#chat_id, text, disable_notifications eu sei pra que serve através da documentação
+def enviar_mensagem(chat_id, text, disable_notification=False):  # link da doc: https://core.telegram.org/bots/api#sendmessage
+    token = '6784879599:AAGP2MTGyujuEJc61-jpN7M-qOQywUyRIes'
+    requests.get(f'https://api.telegram.org/bot{token}/sendMessage?chat_id={chat_id}&text={text}&disable_notification{disable_notification}')
+    
+
+#while True abaixo foi usado na função obter_mensagens
+#while True:
+#   obter_mensagens(apenas_ultima_mensagem=True) # Quero todas as mensagens a partir do momento da execução do bot
+# Se colocar em True, re
+# torna apenas a ultima
+
+def enviar_imagem(links_imagens, chat_id, caption):
+    token = '6784879599:AAGP2MTGyujuEJc61-jpN7M-qOQywUyRIes'
+    for link in links_imagens:
+        requests.get(f'https://api.telegram.org/bot{token}/sendPhoto?chat_id={chat_id}&photo={link}&caption={caption}')
+        sleep(2)
+ 
+ 
+# enviar_mensagem(chat_id='-4019639147', text='aproveite!')
+# o número do chat_id está no arquivo json e conseguimos quando colocamos a função obter mensagem pra rodar.
+
+# Para subir fotos, precisamos de um site de hospedagem de imagens..
+# Neste caso, podemos usar o imgbb e faça o upload das imagens.
+# Após fazer o upload, será criado um link da imagem. Copie o link.
+
+# link das imagens
+# https://ibb.co/KNmFBzV
+# https://ibb.co/vVCNGXB
+imagens = ['https://ibb.co/KNmFBzV', 'https://ibb.co/vVCNGXB']
+enviar_imagem(links_imagens=imagens, chat_id='-4019639147', caption='Proximo carro?')
 
 
-'''Dependendo do bot, vc pode querer somente a ultima mensagem do usuario.
+"""Dependendo do bot, vc pode querer somente a ultima mensagem do usuario.
 para isso: No arquivo json gerado ao apertar pra rodar o programa, a variável
 update_id vai gerar uma numeração a cada nova mensagem(sempre aumenta um numero). 
 Para evitar erros, vamos criar uma forma de
 verificar: Linha 25 deste codigo 
- '''        
+"""       
+
