@@ -61,8 +61,37 @@ def enviar_imagem(links_imagens, chat_id, caption):
 # https://ibb.co/KNmFBzV
 # https://ibb.co/vVCNGXB
 imagens = ['https://ibb.co/KNmFBzV', 'https://ibb.co/vVCNGXB']
-enviar_imagem(links_imagens=imagens, chat_id='-4019639147', caption='Proximo carro?')
+#enviar_imagem(links_imagens=imagens, chat_id='-4019639147', caption='Proximo carro?')
 
+
+# Para envio de audios, primeiro ache um site que guarde esse audio, tipo, mediafire
+def enviar_audio(links_audios, chat_id, caption):
+    token = '6784879599:AAGP2MTGyujuEJc61-jpN7M-qOQywUyRIes'
+    for link in links_audios:
+        data = requests.get(f'https://api.telegram.org/bot{token}/sendAudio?chat_id={chat_id}&audio={link}&caption={caption}')
+        print(data.json())
+
+audios = ['https://download856.mediafire.com/xve1l0g18vygblWzCSM4EG-J4jpv8LYsVHL5STASWhYZfdnVbeoygonX5P3PFWb52q6jUPTbkVjkwVCiIBVAKzLAemZSor2z9WmMGZ33j99aWURphYRGOJBTB_E8t7GObkSS5_fGSUmCuvAY71AIIaTFUiGwUnk55ixSemBMHxs-9w/kzup508w5ybp0w5/Gravando.m4a']
+#enviar_audio(links_audios=audios, chat_id='-4019639147', caption='audio de teste')        
+
+def enviar_documentos(links_documentos, chat_id, caption):
+    token = '6784879599:AAGP2MTGyujuEJc61-jpN7M-qOQywUyRIes'
+    for link in links_documentos:
+        requests.get(f'https://api.telegram.org/bot{token}/sendDocument?chat_id={chat_id}&document={link}&caption={caption}')
+    
+
+# A função acima de enviar documentos está pronta, mas precisamos dos links dos documentos.
+# No caso, estamos usando o google drive para os documentos. 
+# para isso, existe uma maneira. Pegue o link do arquivo e cole:
+# https://drive.google.com/file/d/10wkR9-GNU_75kHRWk4Tc18lpxF-xIlyy/view?usp=sharing
+# o código é o seguinte: drive.google.com/uc?id=####&export=download
+# Dai você pega a maior sequencia de caracteres do link, neste caso> 10wkR9-GNU_75kHRWk4Tc18lpxF-xIlyy
+# E cola no código, no lugar de ####, ficando assim:
+
+# drive.google.com/uc?id=10wkR9-GNU_75kHRWk4Tc18lpxF-xIlyy&export=download
+
+documentos = ['drive.google.com/uc?id=10wkR9-GNU_75kHRWk4Tc18lpxF-xIlyy&export=download']
+enviar_documentos(links_documentos=documentos, chat_id='-4019639147', caption='documento de teste')
 
 """Dependendo do bot, vc pode querer somente a ultima mensagem do usuario.
 para isso: No arquivo json gerado ao apertar pra rodar o programa, a variável
